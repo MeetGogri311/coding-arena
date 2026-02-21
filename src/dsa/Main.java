@@ -1,5 +1,7 @@
 package dsa;
 
+import dsa.queue.Queue;
+import dsa.queue.QueueUsingArray;
 import dsa.stack.Stack;
 import dsa.stack.StackUsingArray;
 import dsa.stack.StackUsingLinkedList;
@@ -10,14 +12,44 @@ public class Main {
         for (int i = 0; i < 10; i++) {
             s.push(i);
         }
-        for (int i = 0; i < 10; i++) {
+        try {
+            System.out.println("Trying to push in stack...");
+            s.push(100);
+        } catch (RuntimeException e) {
+            System.out.printf("Caught Exception: %s in class %s\n", e.getMessage(), s.getClass().getName());
+        }
+        while (!s.empty()) {
             System.out.printf("%d ", s.top());
             s.pop();
         }
         try {
-            s.pop();
+            System.out.println("\nTrying to pop from empty stack");
+            System.out.println(s.pop());
         } catch (RuntimeException e) {
-            System.out.printf("\nCaught Exception: %s in class %s", e.getMessage(), s.getClass().getName());
+            System.out.printf("Caught Exception: %s in class %s", e.getMessage(), s.getClass().getName());
+        }
+    }
+
+    private static void testQueue(Queue q) {
+        System.out.printf("\n\nTesting Stack: %s\n", q.getClass().getName());
+        for (int i = 0; i < 10; i++) {
+            q.enqueue(i);
+        }
+        try {
+            System.out.println("Trying to push in queue...");
+            q.enqueue(100);
+        } catch (RuntimeException e) {
+            System.out.printf("Caught Exception: %s in class %s\n", e.getMessage(), q.getClass().getName());
+        }
+        while (!q.empty()) {
+            System.out.printf("%d ", q.peek());
+            q.dequeue();
+        }
+        try {
+            System.out.println("\nTrying to dequeue from empty queue");
+            System.out.println(q.dequeue());
+        } catch (RuntimeException e) {
+            System.out.printf("Caught Exception: %s in class %s", e.getMessage(), q.getClass().getName());
         }
     }
 
@@ -27,5 +59,8 @@ public class Main {
 
         s = new StackUsingLinkedList();
         testStack(s);
+
+        Queue q = new QueueUsingArray(10);
+        testQueue(q);
     }
 }
