@@ -1,10 +1,12 @@
 package dsa;
+
 import dsa.stack.Stack;
 import dsa.stack.StackUsingArray;
+import dsa.stack.StackUsingLinkedList;
 
 public class Main {
-    public static void main(String[] args) {
-        Stack s = new StackUsingArray(10);
+    private static void testStack(Stack s) {
+        System.out.printf("\n\nTesting Stack: %s\n", s.getClass().getName());
         for (int i = 0; i < 10; i++) {
             s.push(i);
         }
@@ -14,8 +16,16 @@ public class Main {
         }
         try {
             s.pop();
-        } catch (IndexOutOfBoundsException e) {
-            System.err.printf("\nCaught Exception: %s", e.getMessage());
+        } catch (RuntimeException e) {
+            System.out.printf("\nCaught Exception: %s in class %s", e.getMessage(), s.getClass().getName());
         }
+    }
+
+    public static void main(String[] args) {
+        Stack s = new StackUsingArray(10);
+        testStack(s);
+
+        s = new StackUsingLinkedList();
+        testStack(s);
     }
 }
