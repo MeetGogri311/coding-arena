@@ -2,6 +2,8 @@ package dsa;
 
 import dsa.queue.Queue;
 import dsa.queue.QueueUsingArray;
+import dsa.sorting.Order;
+import dsa.sorting.Sorter;
 import dsa.stack.Stack;
 import dsa.stack.StackUsingArray;
 import dsa.stack.StackUsingLinkedList;
@@ -53,6 +55,17 @@ public class Main {
         }
     }
 
+    private static void testHeapSort() {
+        int[] arr = {10, 38, 2, 3, 24, 13, 9};
+        Sorter.heapSort(arr, Order.ASC);
+        System.out.print("\n\nHeap Sort in Ascending Order: ");
+        for (int el : arr) System.out.printf("%d ", el);
+        arr = new int[]{10, 38, 2, 3, 24, 13, 9};
+        Sorter.heapSort(arr, Order.DESC);
+        System.out.print("\nHeap Sort in Descending Order: ");
+        for (int el : arr) System.out.printf("%d ", el);
+    }
+
     public static void main(String[] args) {
         Stack s = new StackUsingArray(10);
         testStack(s);
@@ -62,5 +75,7 @@ public class Main {
 
         Queue q = new QueueUsingArray(10);
         testQueue(q);
+
+        testHeapSort();
     }
 }
